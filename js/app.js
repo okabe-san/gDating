@@ -5,9 +5,10 @@
   'use strict';
 
   angular
-    .module('myApp', [
-      'myApp.config',
-      'myApp.components.main'
+    .module('gDatingApp', [
+      'ngRoute',
+      'gDatingApp.config',
+      'gDatingApp.components.main'
     ]);
 
 })();
