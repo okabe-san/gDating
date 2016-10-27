@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col s12">
+    <a ng-click="" class="btn btn-default">All</a>
+    <a ng-click="" class="btn btn-default">Popular</a>
+    <a ng-click="" class="btn btn-default">Near Me</a>
+    <a ng-click="" class="btn btn-default">My Matches</a>
+    <a ng-click="" class="btn btn-default">Chatting</a>
+  </div>
+
+  <section class="col s5">
+    <div ng-repeat="person in memberCtrl.member">
+      <img ng-src="{{person.avatar}}" class="avatar">
+      <h5>{{person.username}}</h5>
+      <p>{{person.description}}</p>
+      <span ng-controller="infoController as infoCtrl">
+        <a ng-click="infoCtrl.info(person)" ui-sref="member.info">Show Contact!</a>
+      </span>
+    </div>
+  </section>
+
+  <section class="col s7">
+    <div ui-view></div>
+  </section>
+
+</div>

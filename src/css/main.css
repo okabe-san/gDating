@@ -1,1 +1,25 @@
 /* add custom styles */
+.bg {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar {
+  float: left;
+  margin: 10px 20px;
+}
+
+.info {
+   position: fixed;
+   top: 10;
+   background-color: #999;
+   width: 100%;
+   height: 500px;
+   margin-top: 20px;
+}
+
+/*.carousel .carousel-item {
+  width: 400px;
+}*/

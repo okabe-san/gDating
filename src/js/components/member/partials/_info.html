@@ -1,0 +1,9 @@
+<div class="info" ng-controller="infoController as infoCtrl">
+  <img ng-src="{{infoCtrl.person.selected.avatar}}" class="avatar">
+
+  <p>User Name: <big>{{infoCtrl.person.selected.username}}</big></p>
+  <p>Interested In: <big><span ng-if="infoCtrl.person.selected.interestedIn==0">Friendship</span>
+  <span ng-if="infoCtrl.person.selected.interestedIn==1">Romance</span>
+  <span ng-if="infoCtrl.person.selected.interestedIn==2">Life time partner</span>
+  <span ng-if="infoCtrl.person.selected.interestedIn==3">Not sure yet</span></big></p>
+</div>
