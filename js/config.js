@@ -3,17 +3,29 @@
   'use strict';
 
   angular
-    .module('gDatingApp.config', [])
+    .module('gDatingApp.config', ['ui.router'])
     .config(appConfig);
 
-  function appConfig($routeProvider) {
-    $routeProvider
-     .when('/', {
+  function appConfig($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider
+    .state('home', {
+      url: '/',
       templateUrl: 'js/components/main/main.view.html',
       controller: 'mainController',
       controllerAs: 'mainCtrl'
     })
-    .otherwise('/');
+    .state('member', {
+      url: '/member',
+      templateUrl: 'js/components/member/member.view.html',
+      controller: 'memberController',
+      controllerAs: 'memberCtrl'
+    })
+    .state('member.info', {
+      templateUrl: 'js/components/member/partials/_info.html',
+      controller: 'memberController',
+      controllerAs: 'memberCtrl'
+    });
   }
 
 })();

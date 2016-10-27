@@ -6,9 +6,11 @@
 
   angular
     .module('gDatingApp', [
-      'ngRoute',
+      'ui.router',
       'gDatingApp.config',
-      'gDatingApp.components.main'
+      'gDatingApp.components.main',
+      'gDatingApp.components.member',
+      'ui.materialize'
     ]);
 
 })();
