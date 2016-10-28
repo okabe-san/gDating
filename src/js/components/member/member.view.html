@@ -1,14 +1,16 @@
 <div class="row">
   <div class="col s12">
     <a ng-click="" class="btn btn-default">All</a>
-    <a ng-click="" class="btn btn-default">Popular</a>
+    <span ng-controller="popularConroller as popularCtrl">
+      <a ng-click="popularCtrl.popularCheck(memberCtrl.members)" class="btn btn-default">Popular</a>
+    </span>
     <a ng-click="" class="btn btn-default">Near Me</a>
     <a ng-click="" class="btn btn-default">My Matches</a>
     <a ng-click="" class="btn btn-default">Chatting</a>
   </div>
 
   <section class="col s5">
-    <div ng-repeat="person in memberCtrl.member">
+    <div ng-repeat="person in memberCtrl.members">
       <img ng-src="{{person.avatar}}" class="avatar">
       <h5>{{person.username}}</h5>
       <p>{{person.description}}</p>

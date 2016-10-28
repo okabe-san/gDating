@@ -29,6 +29,6 @@
 
   function popularService() {
     /*jshint validthis: true */
-    this.popular = [];
+    this.popularList = [];
   }
 })();
