@@ -4,20 +4,25 @@
 
   angular
     .module('gDatingApp.components.auth', [])
-    .controller('loginController', loginController);
+    .controller('authController', authController);
 
-  loginController.$inject = ['authService'];
+  authController.$inject = ['authService', '$state'];
 
-  function loginController(authService) {
+  function authController(authService, $state) {
     /*jshint validthis: true */
     this.user = {};
-    this.newUser = {};
     this.onSubmit = (login) => {
       authService.loginInfo(login)
       .then((user) => {
         localStorage.setItem('token', user.data.data.token);
+        $state.go('member');
       });
       this.user = {};
     };
+    this.logout = () => {
+      $state.go('home');
+      localStorage.clear();
+    }
   }
+
 })();
