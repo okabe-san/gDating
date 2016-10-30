@@ -11,6 +11,7 @@
   function loginController(authService) {
     /*jshint validthis: true */
     this.user = {};
+    this.newUser = {};
     this.onSubmit = (login) => {
       authService.loginInfo(login)
       .then((user) => {

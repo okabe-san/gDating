@@ -16,7 +16,7 @@
     memberService.getInfo()
     .then((member) => {
       this.members = member;
-      console.log(this.members);
+      // console.log(this.members);
     });
     this.popularCheck = function() {
       this.members = getLikes(popularService, this.members);
