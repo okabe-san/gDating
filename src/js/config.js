@@ -7,9 +7,6 @@
     .config(appConfig)
     .run(routeStart);
 
-  appConfig = ['$stateProvider', '$urlRouterProvider'];
-  routeStart.$inject = ['$rootScope', '$location', '$window', 'authService'];
-
   function appConfig($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -46,11 +43,12 @@
     });
   }
 
-  function routeStart($rootScope, $location, $window, authService) {
-    $rootScope.$on('$routeChageStart', (event, next, curret) => {
-      console.log('test', next.restricted);
-      if (next.restricted && !$window.localStorage.getItem('token')) {
-        $location.path('/login');
+  function routeStart($rootScope, $location, $state, authService) {
+    $rootScope.$on('$stateChangeStart', (event, toState, fromState) => {
+      // console.log('test', toState);
+      if (toState.restricted && !localStorage.getItem('token')) {
+        event.preventDefault();
+        $state.go('login');
       }
     });
   }
