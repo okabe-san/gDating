@@ -5,66 +5,23 @@
   angular
     .module('gDatingApp.components.member', [])
     .controller('memberController', memberController)
-    .controller('popularConroller', popularConroller)
     .controller('infoController', infoController);
 
-  memberController.$inject = ['memberService'];
-  popularConroller.$inject = ['popularService'];
+  memberController.$inject = ['memberService', 'popularService'];
   infoController.$inject = ['infoService'];
 
-  function memberController(memberService) {
+  function memberController(memberService, popularService) {
     /*jshint validthis: true */
     // this.greeting = 'Hello World!';
     memberService.getInfo()
     .then((member) => {
       this.members = member;
+      console.log(this.members);
     });
-  }
-
-  function popularConroller(popularService) {
-    /*jshint validthis: true */
-    this.popular = popularService.popularList;
-    this.popularCheck = (members) => {
-      let memberId = members.map((member) => member._id);
-      let checkList = members.reduce((prev, curr) => {
-        return prev.concat(curr._matches);
-      }, []);
-      let result = checkList.map((check) => {
-        if (memberId.indexOf(check) > -1) {
-          let test = {
-            id: '',
-            num: 0
-          };
-          test.id = check;
-          test.num++;
-          return test;
-        }
-      }).filter((item) => item);
-      console.log(result);
+    this.popularCheck = function() {
+      this.members = getLikes(popularService, this.members);
+      console.log(this.members);
     };
-    //   let checkList = [];
-    //   let membersId = [];
-    //   let result = [];
-    //   members.forEach(function (member) {
-    //     membersId.push(member._id);
-    //     member._matches.forEach(function (match) {
-    //       if(checkList.indexOf(match) === -1) {
-    //         checkList.push(match);
-    //       }
-    //     });
-    //   });
-    //   checkList.forEach(function (check) {
-    //     let test = {
-    //       id: '',
-    //       num: 0
-    //     };
-    //     if (membersId.indexOf(check) > -1) {
-    //       test.id = check;
-    //       test.num ++;
-    //       result.push(test);
-    //     }
-    //   });
-    //   console.log(result);
   }
 
   function infoController(infoService) {
@@ -74,6 +31,37 @@
       // console.log('test', person);
       this.person.selected = person;
     };
+  }
+
+  function getLikes(popularService, members) {
+    /*jshint validthis: true */
+    const popular = popularService.popularList;
+    let memberId = members.map((member) => member._id);
+    let checkList = members.reduce((prev, curr) => {
+      return prev.concat(curr._matches);
+    }, []);
+    let result = checkList.map((check) => {
+      if (memberId.indexOf(check) > -1) {
+        let temp = members.filter((tempMember) => {
+          if (tempMember._id === check) {
+            return tempMember;
+          }
+        });
+        let test = {
+          _id: '',
+          num: 0,
+          username: '',
+          description: ''
+        };
+        test._id = check;
+        test.num++;
+        test.username = temp.username;
+        test.description = temp.description;
+        return test;
+      }
+    }).filter((item) => item);
+    popular.push(result);
+    return popular[0];
   }
 
 })();
