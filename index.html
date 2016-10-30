@@ -13,6 +13,9 @@
       <a href="#!" class="brand-logo">gDating</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="/#/login">Login</a></li>
+        <span ng-controller="authController as authCtrl">
+          <li><a ng-click="authCtrl.logout()">Logout</a></li>
+        </span>
         <li><a href="#">Register</a></li>
       </ul>
     </div>

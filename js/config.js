@@ -36,14 +36,14 @@
     .state('login', {
       url: '/login',
       templateUrl: 'js/components/auth/login.view.html',
-      controller: 'loginController',
-      controllerAs: 'loginCtrl',
+      controller: 'authController',
+      controllerAs: 'authCtrl',
       restricted: false,
       preventLoggedIn: false
     });
   }
 
-  function routeStart($rootScope, $location, $state, authService) {
+  function routeStart($rootScope, $state, authService) {
     $rootScope.$on('$stateChangeStart', (event, toState, fromState) => {
       // console.log('test', toState);
       if (toState.restricted && !localStorage.getItem('token')) {
