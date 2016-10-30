@@ -6,9 +6,11 @@
     .module('gDatingApp.components.main')
     .service('memberService', memberService)
     .service('infoService', infoService)
-    .service('popularService', popularService);
+    .service('popularService', popularService)
+    .service('authService', authService);
 
   memberService.$inject = ['$http'];
+  authService.$inject = ['$http'];
 
   function memberService($http) {
     /*jshint validthis: true */
@@ -30,5 +32,12 @@
   function popularService() {
     /*jshint validthis: true */
     this.popularList = [];
+  }
+
+  function authService($http) {
+    /*jshint validthis: true */
+    this.loginInfo = (login) => {
+      return $http.post('https://galvanize-student-apis.herokuapp.com/gdating/auth/login', login);
+    };
   }
 })();

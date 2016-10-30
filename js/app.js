@@ -10,6 +10,7 @@
       'gDatingApp.config',
       'gDatingApp.components.main',
       'gDatingApp.components.member',
+      'gDatingApp.components.auth',
       'ui.materialize'
     ]);
 
