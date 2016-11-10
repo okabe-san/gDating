@@ -34,7 +34,7 @@
       const id = this.person.selected._id;
       matchService.getMatches(id)
       .then((ids) => {
-        fullMembers(ids, memberService)
+        matchMemberOnly(ids, memberService)
         .then((result) => {
           this.match.matchMember = result;
         });
@@ -42,12 +42,12 @@
     };
   }
 
-  function fullMembers(ids, memberService) {
+  function matchMemberOnly(ids, memberService) {
     /*jshint validthis: true */
     return memberService.getInfo()
-    .then((member) => {
-      let result = member.filter((temp) => {
-        return ids.indexOf(temp._id) !== -1;
+    .then((members) => {
+      let result = members.filter((member) => {
+        return ids.indexOf(member._id) !== -1;
       });
       return result;
     });

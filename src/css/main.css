@@ -20,7 +20,7 @@ p {
 }
 
 .person-wrapper {
-  height: 200px;
+  min-height: 200px;
 }
 
 .avatar {
@@ -35,9 +35,9 @@ p {
    background-color: #f1f1f1;
    width: 55%;
    min-height: 500px;
-   margin-top: 20px;
    padding: 20px 40px;
    border: 3px dotted #999;
+   word-wrap: break-word;
 }
 
 .person {
