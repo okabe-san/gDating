@@ -1,9 +1,12 @@
-<div class="info" ng-controller="infoController as infoCtrl">
-  <img ng-src="{{infoCtrl.person.selected.avatar}}" class="avatar">
-
-  <p>User Name: <big>{{infoCtrl.person.selected.username}}</big></p>
-  <p>Interested In: <big><span ng-if="infoCtrl.person.selected.interestedIn==0">Friendship</span>
-  <span ng-if="infoCtrl.person.selected.interestedIn==1">Romance</span>
-  <span ng-if="infoCtrl.person.selected.interestedIn==2">Life time partner</span>
-  <span ng-if="infoCtrl.person.selected.interestedIn==3">Not sure yet</span></big></p>
+<div class="info-wrapper" ng-controller="infoController as infoCtrl">
+  <div class="person">
+    <h4>{{infoCtrl.person.selected.username}}</h4>
+    <img ng-src="{{infoCtrl.person.selected.avatar}}" class="avatar">
+    <p><big>{{infoCtrl.person.selected.email}}</big></p>
+    <p>{{infoCtrl.person.selected.description}}</p>
+  </div>
+  <div class="friends">
+    <p><big>Friends Count: {{infoCtrl.match.matchMember.length}}<big></p>
+    <img ng-src="{{match.avatar}}" class="avatar" ng-repeat="match in infoCtrl.match.matchMember">
+  </div>
 </div>
