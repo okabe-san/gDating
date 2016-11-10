@@ -14,11 +14,6 @@
     <span>
       <a ng-click="memberCtrl.popularCheck(memberCtrl.members); sortBy='-count'" class="btn btn-default btn-nav" ng-model="popular">Popular</a>
     </span>
-    <!-- <div ng-controller="categoryController as categoryCtrl">
-      <span>
-        <select class="browser-default" ng-model="$root.interestedIn" ng-options="name for name in categoryCtrl.interestedIn">{{name}}</select>
-      </span>
-    </div> -->
   </div>
   <section class="col s5">
     <div class="person-wrapper" ng-repeat="person in memberCtrl.members | orderBy: sortBy">
