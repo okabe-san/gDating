@@ -11,6 +11,7 @@
   function authController(authService, $state) {
     /*jshint validthis: true */
     this.user = {};
+    this.newUder = {};
     this.onSubmit = (login) => {
       authService.loginInfo(login)
       .then((user) => {
@@ -22,7 +23,15 @@
     this.logout = () => {
       $state.go('home');
       localStorage.clear();
-    }
+    };
+    this.onClick = (register) => {
+      authService.registerInfo(register)
+      .then((newUser) => {
+        localStorage.setItem('token', newUser.data.data.token);
+        $state.go('member');
+      });
+      this.newUser = {};
+    };
   }
 
 })();

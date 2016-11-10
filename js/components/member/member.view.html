@@ -1,26 +1,51 @@
+<nav>
+  <div class="nav-wrapper #212121 grey darken-4">
+    <a href="#!" class="brand-logo">gDating</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <span ng-controller="authController as authCtrl">
+        <li><a ng-click="authCtrl.logout()">Logout</a></li>
+      </span>
+    </ul>
+  </div>
+</nav>
 <div class="row">
   <div class="col s12">
-    <a ng-click="" class="btn btn-default">All</a>
+    <a ng-click="reload()" class="btn btn-default btn-nav">All</a>
     <span>
-      <a ng-click="memberCtrl.popularCheck(memberCtrl.members)" class="btn btn-default" ng-model="popular">Popular</a>
+      <a ng-click="memberCtrl.popularCheck(memberCtrl.members); sortBy='-count'" class="btn btn-default btn-nav" ng-model="popular">Popular</a>
     </span>
-    <a ng-click="" class="btn btn-default">Near Me</a>
-    <a ng-click="" class="btn btn-default">My Matches</a>
-    <a ng-click="" class="btn btn-default">Chatting</a>
+    <!-- <div ng-controller="categoryController as categoryCtrl">
+      <span>
+        <select class="browser-default" ng-model="$root.interestedIn" ng-options="name for name in categoryCtrl.interestedIn">{{name}}</select>
+      </span>
+    </div> -->
   </div>
-
   <section class="col s5">
-    <div ng-repeat="person in memberCtrl.members">
+    <div class="person-wrapper" ng-repeat="person in memberCtrl.members | orderBy: sortBy">
       <img ng-src="{{person.avatar}}" class="avatar">
       <h5>{{person.username}}</h5>
-      <p>{{person.description}}</p>
+      <p>Interested In: <big>
+        <span ng-if="person.interestedIn==0">Drinking Buddy</span>
+        <span ng-if="person.interestedIn==1">MMO Raiding Buddy</span>
+        <span ng-if="person.interestedIn==2">Cosplay Buddy</span>
+        <span ng-if="person.interestedIn==3">Pokemon Buddy</span>
+      </big></p>
+      <p>Gender Lookin For: <big>
+        <span ng-if="person.gender==0">Female</span>
+        <span ng-if="person.gender==1">Male</span>
+        <span ng-if="person.gender==2">Male / Female</span>
+        <span ng-if="person.gender==3">Not Specified</span>
+      </big></p>
       <span ng-controller="infoController as infoCtrl">
-        <a ng-click="infoCtrl.info(person)" ui-sref="member.info">Show Contact!</a>
+        <a ng-click="infoCtrl.info(person)" ui-sref="member.info">Show Moer Info!</a>
       </span>
+      <span ng-if="person.count>0"><p><big>Friends Count: {{person.count}}</big></p></span>
+      <hr>
     </div>
   </section>
 
   <section class="col s7">
+    <div class="info"></div>
     <div ui-view></div>
   </section>
 

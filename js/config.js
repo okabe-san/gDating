@@ -40,6 +40,14 @@
       controllerAs: 'authCtrl',
       restricted: false,
       preventLoggedIn: false
+    })
+    .state('register', {
+      url: '/register',
+      templateUrl: 'js/components/auth/register.view.html',
+      controller: 'authController',
+      controllerAs: 'authCtrl',
+      restricted: false,
+      preventLoggedIn: false
     });
   }
 

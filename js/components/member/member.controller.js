@@ -7,61 +7,70 @@
     .controller('memberController', memberController)
     .controller('infoController', infoController);
 
-  memberController.$inject = ['memberService', 'popularService'];
-  infoController.$inject = ['infoService'];
+  memberController.$inject = ['memberService', 'popularService', 'matchService', '$scope', '$state'];
+  infoController.$inject = ['memberService', 'infoService', 'matchService', 'matchMemberService'];
+  getLikes.$inject = ['popularService'];
 
-  function memberController(memberService, popularService) {
+  function memberController(memberService, popularService, matchService, $scope, $state) {
     /*jshint validthis: true */
-    // this.greeting = 'Hello World!';
     memberService.getInfo()
     .then((member) => {
       this.members = member;
-      // console.log(this.members);
     });
+    $scope.reload = function () {
+      $state.reload();
+    };
     this.popularCheck = function() {
       this.members = getLikes(popularService, this.members);
-      console.log(this.members);
     };
   }
 
-  function infoController(infoService) {
+  function infoController(memberService, infoService, matchService, matchMemberService) {
     /*jshint validthis: true */
     this.person = infoService.person;
+    this.match = matchMemberService.matchMember;
     this.info = (person) => {
-      // console.log('test', person);
       this.person.selected = person;
+      const id = this.person.selected._id;
+      matchService.getMatches(id)
+      .then((ids) => {
+        fullMembers(ids, memberService)
+        .then((result) => {
+          this.match.matchMember = result;
+        });
+      });
     };
+  }
+
+  function fullMembers(ids, memberService) {
+    /*jshint validthis: true */
+    return memberService.getInfo()
+    .then((member) => {
+      let result = member.filter((temp) => {
+        return ids.indexOf(temp._id) !== -1;
+      });
+      return result;
+    });
   }
 
   function getLikes(popularService, members) {
     /*jshint validthis: true */
-    const popular = popularService.popularList;
-    let memberId = members.map((member) => member._id);
-    let checkList = members.reduce((prev, curr) => {
+    let check = members.reduce((prev, curr) => {
       return prev.concat(curr._matches);
     }, []);
-    let result = checkList.map((check) => {
-      if (memberId.indexOf(check) > -1) {
-        let temp = members.filter((tempMember) => {
-          if (tempMember._id === check) {
-            return tempMember;
-          }
-        });
-        let test = {
-          _id: '',
-          num: 0,
-          username: '',
-          description: ''
-        };
-        test._id = check;
-        test.num++;
-        test.username = temp.username;
-        test.description = temp.description;
-        return test;
-      }
-    }).filter((item) => item);
-    popular.push(result);
-    return popular[0];
+    let result = members.filter((member) => {
+      return check.indexOf(member._id) !== -1;
+    });
+    result.map((id) => {
+      id.count = 0;
+      check.forEach((num) => {
+        if (num === id._id) {
+          id.count++;
+        }
+      });
+      return id;
+    });
+    return result;
   }
 
 })();
