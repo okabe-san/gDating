@@ -27,8 +27,7 @@
       preventLoggedIn: true
     })
     .state('member.info', {
-      url: '/info',
-      templateUrl: 'js/components/member/partials/_info.html',
+      templateUrl: 'js/components/member/info.html',
       controller: 'memberController',
       controllerAs: 'memberCtrl',
       restricted: true,
