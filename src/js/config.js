@@ -12,7 +12,7 @@
     $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'js/components/main/main.view.html',
+      templateUrl: './js/components/main/main.view.html',
       controller: 'mainController',
       controllerAs: 'mainCtrl',
       restricted: false,
@@ -20,14 +20,14 @@
     })
     .state('member', {
       url: '/member',
-      templateUrl: 'js/components/member/member.view.html',
+      templateUrl: './js/components/member/member.view.html',
       controller: 'memberController',
       controllerAs: 'memberCtrl',
       restricted: true,
       preventLoggedIn: true
     })
     .state('member.info', {
-      templateUrl: 'js/components/member/partials/_info.html',
+      templateUrl: './js/components/member/partials/_info.html',
       controller: 'memberController',
       controllerAs: 'memberCtrl',
       restricted: true,
@@ -35,7 +35,7 @@
     })
     .state('login', {
       url: '/login',
-      templateUrl: 'js/components/auth/login.view.html',
+      templateUrl: './js/components/auth/login.view.html',
       controller: 'authController',
       controllerAs: 'authCtrl',
       restricted: false,
@@ -43,7 +43,7 @@
     })
     .state('register', {
       url: '/register',
-      templateUrl: 'js/components/auth/register.view.html',
+      templateUrl: './js/components/auth/register.view.html',
       controller: 'authController',
       controllerAs: 'authCtrl',
       restricted: false,
