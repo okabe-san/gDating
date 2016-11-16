@@ -25,7 +25,7 @@
       restricted: true
     })
     .state('member.info', {
-      templateUrl: 'js/components/member/partials/_info.html',
+      templateUrl: 'src/js/components/member/partials/_info.html',
       controller: 'memberController',
       controllerAs: 'memberCtrl',
       restricted: true
